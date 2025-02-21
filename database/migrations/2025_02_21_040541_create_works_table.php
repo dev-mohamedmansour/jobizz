@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('works', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
             $table->longText('payload');
@@ -21,20 +21,20 @@ return new class extends Migration
             $table->unsignedInteger('created_at');
         });
 
-        Schema::create('job_batches', function (Blueprint $table) {
+        Schema::create('work_batches', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
-            $table->integer('total_jobs');
-            $table->integer('pending_jobs');
-            $table->integer('failed_jobs');
-            $table->longText('failed_job_ids');
+            $table->integer('total_works');
+            $table->integer('pending_works');
+            $table->integer('failed_works');
+            $table->longText('failed_work_ids');
             $table->mediumText('options')->nullable();
             $table->integer('cancelled_at')->nullable();
             $table->integer('created_at');
             $table->integer('finished_at')->nullable();
         });
 
-        Schema::create('failed_jobs', function (Blueprint $table) {
+        Schema::create('failed_works', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
             $table->text('connection');
@@ -50,8 +50,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
-        Schema::dropIfExists('job_batches');
-        Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('works');
+        Schema::dropIfExists('work_batches');
+        Schema::dropIfExists('failed_works');
     }
 };
