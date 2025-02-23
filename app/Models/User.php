@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class User extends Model 
+class User extends Authenticable
 {
-
+	use HasApiTokens;
     protected $table = 'users';
     public $timestamps = true;
-    protected $fillable = array('name', 'email', 'phone', 'password', 'provider_id', 'provider_name', 'confermed_email', 'pin_code');
+    protected $fillable = array('name', 'email', 'phone', 'password', 'provider_id', 'provider_name', 'conformed_email', 'pin_code');
     protected $hidden = array('password', 'rememberToken');
 	  
 	  /**

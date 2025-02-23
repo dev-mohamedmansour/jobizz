@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\GithubController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function (){
+	  Route::group(['prefix' =>'v1', 'namespace' => 'Api'], function (){
+			 Route::post('/register',[AuthController::class, 'register']);
+			 Route::get('/auth/github', [GithubController::class, 'redirectToGithub']);
+			 Route::get('/auth/github/callback', [GithubController::class, 'handleGithubCallback']);
+	  });
 });
