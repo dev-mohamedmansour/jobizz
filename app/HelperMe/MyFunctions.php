@@ -1,5 +1,5 @@
 <?php
-function responseJson($status, $message, $data = null)
+function responseJson($status, $message, $data = null): \Illuminate\Http\JsonResponse
 {
     $response = [
         'status' => $status,
